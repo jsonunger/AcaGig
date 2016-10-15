@@ -1,11 +1,27 @@
-let configPath;
+let env;
 
 if (process.env.NODE_ENV === 'production') {
-  configPath = require('./production');
+  env = require('./production');
 } else if (process.env.NODE_ENV === 'testing') {
-  configPath = require('./testing');
+  env = require('./testing');
 } else {
-  configPath = require('./development');
+  env = require('./development');
+}
+if (process.env.NODE_ENV !== 'testing') {
+  env = {
+    ...env,
+    FACEBOOK: {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+      profileFields: ['id', 'displayName', 'photos', 'emails']
+    },
+    GOOGLE: {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL
+    }
+  };
 }
 
-export default configPath;
+export default env;

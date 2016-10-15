@@ -5,11 +5,11 @@ import connect from 'connect-session-sequelize';
 
 const SequelizeStore = connect(session.Store);
 
-const ENABLED_AUTH_STRATEGIES = [
-  'local',
-  // 'facebook',
-  // 'google'
-];
+const ENABLED_AUTH_STRATEGIES = ['local'];
+
+if (process.env.NODE_ENV !== 'testing') {
+  ENABLED_AUTH_STRATEGIES.push('facebook', 'google');
+}
 
 export default function (app, db) {
   const dbStore = new SequelizeStore({ db });

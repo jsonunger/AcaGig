@@ -23,6 +23,10 @@ const startServer = () => {
 };
 
 db.sync()
+  .then(function() {
+    console.log(chalk.green('Sequelize models synced to PostgreSQL'));
+    return null;
+  })
   .then(createApplication)
   .then(startServer)
   .catch(err => console.error(chalk.red(err.stack)));

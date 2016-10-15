@@ -6,7 +6,7 @@ module.exports = function(app, db) {
   const User = db.model('user');
 
   const strategyFn = (email, password, done) => {
-    User.findOne({ where: { email } })
+    User.findByEmail(email)
       .then(user => {
         if (!user || !user.correctPassword(password)) {
           done(null, false);
@@ -17,11 +17,19 @@ module.exports = function(app, db) {
       .catch(done);
   };
 
+  const login = (req, res, next, user) => {
+    return req.login(user, signupErr => {
+      if (signupErr) return next(signupErr);
+      res.status(201).json({
+        user: user.sanitize()
+      });
+    });
+  };
+
   passport.use(new Strategy({ usernameField: 'email', passwordField: 'password' }, strategyFn));
 
-  // A POST /signup route to create a new user
   app.post('/signup', (req, res, next) => {
-    User.findOne({ where: { email: req.body.email } })
+    User.findByEmail(req.body.email)
       .then(user => {
         if (user) {
           const err = new Error('Email already associated with a user');
@@ -30,19 +38,10 @@ module.exports = function(app, db) {
         }
         return User.create(req.body);
       })
-      .then(user => {
-        req.login(user, signupErr => {
-          if (signupErr) return next(signupErr);
-          // We respond the same way POST /login does
-          res.status(201).send({
-            user: user.sanitize()
-          });
-        });
-      })
+      .then(user => login(res, res, next, user))
       .catch(next);
   });
 
-  // A POST /login route is created to handle login
   app.post('/login', (req, res, next) => {
     const authCb = (err, user) => {
       if (err) return next(err);
@@ -53,14 +52,7 @@ module.exports = function(app, db) {
         return next(error);
       }
 
-      // req.login will establish our session
-      return req.login(user, loginErr => {
-        if (loginErr) return next(loginErr);
-        // We respond with a response object that has user with id and email
-        res.status(200).send({
-          user: user.sanitize()
-        });
-      });
+      return login(req, res, next, user);
     };
 
     passport.authenticate('local', authCb)(req, res, next);
