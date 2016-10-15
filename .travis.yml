@@ -4,3 +4,7 @@ node_js:
 addons:
   code_climate:
     repo_token: 7595ba57e96e2a7714ca9d396e1ab4b3fa4fa4d3950b15f5236c56f370b4dfd6
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database acagig_test;' -U postgres
