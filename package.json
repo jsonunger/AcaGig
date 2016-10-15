@@ -9,7 +9,8 @@
     "test": "NODE_ENV=testing ./node_modules/.bin/mocha --reporter spec --compilers js:babel-register 'tests/**/*.spec.js'",
     "test:server": "NODE_ENV=testing ./node_modules/.bin/mocha --reporter spec --compilers js:babel-register 'tests/server/**/*.spec.js'",
     "test:src": "NODE_ENV=testing ./node_modules/.bin/mocha --reporter spec --compilers js:babel-register 'tests/src/**/*.spec.js'",
-    "coverage": "./node_modules/.bin/nyc -r lcov -i babel-register npm test"
+    "coverage": "./node_modules/.bin/nyc -r lcov -i babel-register npm test",
+    "seed": "node ./bin/seed"
   },
   "engines": {
     "node": "6.4.0",
@@ -32,6 +33,7 @@
     "passport-local": "^1.0.0",
     "pg": "^6.0.3",
     "pg-hstore": "^2.3.2",
+    "pluralize": "^3.0.0",
     "react": "^15.2.1",
     "react-bootstrap": "^0.29.5",
     "react-dom": "^15.2.1",
@@ -56,6 +58,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "codeclimate-test-reporter": "^0.4.0",
+    "commander": "^2.9.0",
     "css-loader": "^0.23.1",
     "dotenv": "^2.0.0",
     "eslint": "^3.8.0",

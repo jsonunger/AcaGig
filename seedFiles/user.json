@@ -1,0 +1,11 @@
+[{
+  "fullName": "Jason Unger",
+  "email": "jason@jsonunger.com",
+  "password": "password",
+  "isAdmin": true
+},
+{
+  "fullName": "Caitlin Nelson",
+  "email": "caitlin@nelson.com",
+  "password": "password"
+}]
