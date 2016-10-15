@@ -7,9 +7,21 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   env = require('./development');
 }
-
-if (env.FACEBOOK) {
-  env.FACEBOOK.profileFields = ['id', 'displayName', 'photos', 'emails'];
+if (process.env.NODE_ENV !== 'testing') {
+  env = {
+    ...env,
+    FACEBOOK: {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+      profileFields: ['id', 'displayName', 'photos', 'emails']
+    },
+    GOOGLE: {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL
+    }
+  };
 }
 
 export default env;
