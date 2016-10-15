@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import reducer, { LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAILURE } from '../../auth';
+import reducer, { LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAILURE } from '../../../../../../src/redux/modules/auth';
 
 const credentials = {
   email: 'test@test.com',

@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import { isLoaded } from '../../auth';
+import { isLoaded } from '../../../../../../src/redux/modules/auth';
 
 export default function (mockStore) {
   describe('isLoaded', () => {

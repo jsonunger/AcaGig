@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import promise from '../../middleware/promise';
-import reducer from '../auth';
-import * as test from './tests';
+import promise from '../../../../src/redux/middleware/promise';
+import reducer from '../../../../src/redux/modules/auth';
+import * as test from './tests/auth';
 
 const middlewares = [ thunk, promise ];
 const mockStore = configureMockStore(middlewares);

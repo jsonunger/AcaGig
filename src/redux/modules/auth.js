@@ -1,4 +1,4 @@
-import auth from '../../../api/auth';
+import auth from '../../api/auth';
 
 export const LOAD           = 'LOAD';
 export const LOAD_SUCCESS   = 'LOAD_SUCCESS';

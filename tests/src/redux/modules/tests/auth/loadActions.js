@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import reducer, { LOAD, LOAD_SUCCESS, LOAD_FAILURE } from '../../auth';
+import reducer, { LOAD, LOAD_SUCCESS, LOAD_FAILURE } from '../../../../../../src/redux/modules/auth';
 
 const successRes = {
   user: { email: 'test@test.com', password: 'test1234' }

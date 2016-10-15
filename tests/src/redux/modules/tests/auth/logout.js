@@ -5,7 +5,7 @@ import nock from 'nock';
 import {
   logout,
   LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAILURE
-} from '../../auth';
+} from '../../../../../../src/redux/modules/auth';
 
 export default function (mockStore) {
   describe('logout', () => {

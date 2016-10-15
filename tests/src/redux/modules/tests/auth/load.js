@@ -5,7 +5,7 @@ import nock from 'nock';
 import {
   load,
   LOAD, LOAD_SUCCESS, LOAD_FAILURE
-} from '../../auth';
+} from '../../../../../../src/redux/modules/auth';
 
 const credentials = {
   email: 'test@test.com',
@@ -24,8 +24,7 @@ export default function (mockStore) {
       nock.cleanAll();
     });
 
-    const sessionAPICall = nock(`http://localhost:8080`)
-                          .get('/session');
+    const sessionAPICall = nock(`http://localhost:8080`).get('/session');
 
     it('creates LOAD when initially dispatched', () => {
       sessionAPICall.reply(200, credentials);

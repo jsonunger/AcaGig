@@ -1,12 +1,14 @@
 import { get, post } from '../utils/ajax';
 
-export const fetchSession = () => get('/session');
+const baseURL = process.env.URL || 'http://localhost:8080';
 
-export const trySignup = (credentials) => post('/signup', credentials);
+export const fetchSession = () => get(`${baseURL}/session`);
 
-export const tryLogin = (credentials) => post('/login', credentials);
+export const trySignup = (credentials) => post(`${baseURL}/signup`, credentials);
 
-export const tryLogout = () => get('/logout');
+export const tryLogin = (credentials) => post(`${baseURL}/login`, credentials);
+
+export const tryLogout = () => get(`${baseURL}/logout`);
 
 const auth = {
   fetchSession,

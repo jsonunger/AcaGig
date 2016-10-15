@@ -1,7 +1,7 @@
 'use strict';
 
 import { expect } from 'chai';
-import reducer, { SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE } from '../../auth';
+import reducer, { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../../../../../../src/redux/modules/auth';
 
 const successRes = {
   user: { email: 'test@test.com', password: 'test1234' }
@@ -12,10 +12,10 @@ const failureRes = {
 };
 
 export default function () {
-  describe('SIGNUP', () => {
+  describe('LOGIN', () => {
     const nextState = reducer(
       { loading: false, error: failureRes },
-      { type: SIGNUP }
+      { type: LOGIN }
     );
 
     it('by setting \'loading\' to true', () => {
@@ -27,10 +27,10 @@ export default function () {
     });
   });
 
-  describe('SIGNUP_SUCCESS', () => {
+  describe('LOGIN_SUCCESS', () => {
     const nextState = reducer(
       { loading: true, loaded: false },
-      { type: SIGNUP_SUCCESS, result: successRes }
+      { type: LOGIN_SUCCESS, result: successRes }
     );
 
     it('by setting \'loading\' to false', () => {
@@ -46,10 +46,10 @@ export default function () {
     });
   });
 
-  describe('SIGNUP_FAILURE', () => {
+  describe('LOGIN_FAILURE', () => {
     const nextState = reducer(
       { loading: true, loaded: false },
-      { type: SIGNUP_FAILURE, error: failureRes}
+      { type: LOGIN_FAILURE, error: failureRes}
     );
 
     it('by setting \'loading\' to false', () => {

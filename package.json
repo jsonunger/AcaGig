@@ -6,8 +6,9 @@
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
     "build": "NODE_ENV='production' webpack -p --config ./webpack.prod.config.js",
-    "test": "NODE_ENV='testing' ./node_modules/.bin/mocha --compilers js:babel-register **/spec.js",
-    "test:watch": "NODE_ENV='testing' ./node_modules/.bin/mocha --watch --compilers js:babel-register **/spec.js"
+    "test": "NODE_ENV=testing ./node_modules/.bin/mocha --reporter spec --compilers js:babel-register 'tests/**/*.spec.js'",
+    "test:server": "NODE_ENV=testing ./node_modules/.bin/mocha --reporter spec --compilers js:babel-register 'tests/server/**/*.spec.js'",
+    "test:src": "NODE_ENV=testing ./node_modules/.bin/mocha --reporter spec --compilers js:babel-register 'tests/src/**/*.spec.js'"
   },
   "engines": {
     "node": "6.4.0",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.3.7",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-polyfill": "^6.9.1",
@@ -68,6 +70,7 @@
     "redux-logger": "^2.6.1",
     "redux-mock-store": "^1.1.2",
     "sass-loader": "^4.0.0",
+    "sinon": "^1.17.6",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",

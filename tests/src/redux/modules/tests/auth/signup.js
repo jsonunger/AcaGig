@@ -5,7 +5,7 @@ import nock from 'nock';
 import {
   signup,
   SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE
-} from '../../auth';
+} from '../../../../../../src/redux/modules/auth';
 
 const credentials = {
   email: 'test@test.com',
