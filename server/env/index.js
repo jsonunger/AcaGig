@@ -1,11 +1,15 @@
-let configPath;
+let env;
 
 if (process.env.NODE_ENV === 'production') {
-  configPath = require('./production');
+  env = require('./production');
 } else if (process.env.NODE_ENV === 'testing') {
-  configPath = require('./testing');
+  env = require('./testing');
 } else {
-  configPath = require('./development');
+  env = require('./development');
 }
 
-export default configPath;
+if (env.FACEBOOK) {
+  env.FACEBOOK.profileFields = ['id', 'displayName', 'photos', 'emails'];
+}
+
+export default env;
