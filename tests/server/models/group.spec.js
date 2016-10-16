@@ -1,5 +1,3 @@
-import { stub, spy } from 'sinon';
-import { expect } from 'chai';
 import db from '../../../server/db';
 import { errorInstance } from '../utils';
 
