@@ -11,3 +11,6 @@ before_script:
 script: npm run coverage
 after_script:
   - codeclimate-test-reporter < coverage/lcov.info
+notifications:
+  email:
+    on_success: never
