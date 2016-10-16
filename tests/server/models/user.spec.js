@@ -1,6 +1,7 @@
 import { stub, spy } from 'sinon';
 import { expect } from 'chai';
 import db from '../../../server/db';
+import { errorInstance } from '../utils';
 
 const User = db.model('user');
 
@@ -179,23 +180,18 @@ describe('User model', () => {
     const buildWithExistingEmail = User.build({ email: 'obama@gmail.com', password: 'potus', fullName: 'Barack Obama' });
     const buildWithNoName = User.build({ email: 'obama@gmail.com', password: 'potus' });
 
-    const errorInstance = (res, type) => {
-      expect(res).to.be.an.instanceOf(Error);
-      expect(res.errors[0].type).to.equal(type);
-    };
-
     describe('email', () => {
 
       beforeEach(createBasicUser);
 
       it('rejects a bad email', () => {
         return buildBadEmail.validate()
-          .then(res => errorInstance(res, 'Validation error'));
+          .then(res => errorInstance(res, 'Validation isEmail failed'));
       });
 
       it('email cannot be null', () => {
         return buildWithNoEmail.validate()
-          .then(res => errorInstance(res, 'notNull Violation'));
+          .then(res => errorInstance(res, 'email cannot be null'));
       });
 
       it('email has to be unique', () => {
@@ -203,7 +199,7 @@ describe('User model', () => {
           .then(result => {
             expect(result).to.not.exist;
           })
-          .catch(err => errorInstance(err, 'unique violation'));
+          .catch(err => errorInstance(err, 'email must be unique'));
       });
 
     });
@@ -212,7 +208,7 @@ describe('User model', () => {
 
       it('fullName cannot be null', () => {
         return buildWithNoName.validate()
-          .then(res => errorInstance(res, 'notNull Violation'));
+          .then(res => errorInstance(res, 'fullName cannot be null'));
       });
 
     });
